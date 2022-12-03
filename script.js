@@ -41,26 +41,31 @@ const getRandomIndex = () => {
 
 const getQestionOfRandomIndex = () => {
   if (currentPullOfQuestions.length !== isNull) {
-    const currentIndex = getRandomIndex();
+    let currentIndex = getRandomIndex();
     let titleQuestion = currentPullOfQuestions[currentIndex].question;
     let descriptionQuestion = currentPullOfQuestions[currentIndex].answare;
     remainingQuestionCounter.innerHTML = `${currentPullOfQuestions.length - 1}`;
-    makeElementVisible(resetBtn);
-    makeElementVisible(remainingQuestionCounter);
     title.innerText = titleQuestion;
     description.innerText = descriptionQuestion;
     section.appendChild(title);
     section.appendChild(description);
     container.appendChild(section);
-    currentPullOfQuestions.splice(currentIndex, 1);
+    doNotShowCurrentQuestionAgain();
+    makeElementVisible(resetBtn);
+    makeElementVisible(remainingQuestionCounter);
   } else {
     title.innerText = 'Wyczerpałeś pulę pytań';
     description.innerText = '';
+    makeElementVisible(startOverBtn);
     makeElementHidden(getQuestionBtn);
     makeElementHidden(resetBtn);
-    makeElementVisible(startOverBtn);
     makeElementHidden(remainingQuestionCounter);
   }
+  return currentPullOfQuestions;
+};
+
+const doNotShowCurrentQuestionAgain = (currentIndex) => {
+  currentPullOfQuestions.splice(currentIndex, 1);
   return currentPullOfQuestions;
 };
 

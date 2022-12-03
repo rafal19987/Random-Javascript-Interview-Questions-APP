@@ -1,8 +1,8 @@
 const getQuestionBtn = document.querySelector('#getQuestion');
 const startOverBtn = document.querySelector('#startOver');
 const resetBtn = document.querySelector('#reset');
-const leftCouterQuestions = document.querySelector('#leftQuestions');
-leftCouterQuestions.innerHTML = 0;
+const remainingQuestionCounter = document.querySelector('#leftQuestions');
+remainingQuestionCounter.innerHTML = 0;
 
 const isNull = 0;
 const section = document.createElement('section');
@@ -44,9 +44,9 @@ const getQestionOfRandomIndex = () => {
     const currentIndex = getRandomIndex();
     let titleQuestion = currentPullOfQuestions[currentIndex].question;
     let descriptionQuestion = currentPullOfQuestions[currentIndex].answare;
-    leftCouterQuestions.innerHTML = `${currentPullOfQuestions.length - 1}`;
+    remainingQuestionCounter.innerHTML = `${currentPullOfQuestions.length - 1}`;
     makeElementVisible(resetBtn);
-    makeElementVisible(leftCouterQuestions);
+    makeElementVisible(remainingQuestionCounter);
     title.innerText = titleQuestion;
     description.innerText = descriptionQuestion;
     section.appendChild(title);
@@ -59,14 +59,14 @@ const getQestionOfRandomIndex = () => {
     makeElementHidden(getQuestionBtn);
     makeElementHidden(resetBtn);
     makeElementVisible(startOverBtn);
-    makeElementHidden(leftCouterQuestions);
+    makeElementHidden(remainingQuestionCounter);
   }
   return currentPullOfQuestions;
 };
 
 const resetQuestions = () => {
   currentPullOfQuestions = [...baseOfQuestions];
-  leftCouterQuestions.innerHTML = `${currentPullOfQuestions.length}`;
+  remainingQuestionCounter.innerHTML = `${currentPullOfQuestions.length}`;
   // currentPullOfQuestions = [...baseOfQuestions];
   title.innerText = '';
   description.innerText = '';

@@ -2,7 +2,9 @@ const getQuestionBtn = document.querySelector('#getQuestion');
 const startOverBtn = document.querySelector('#startOver');
 const resetBtn = document.querySelector('#reset');
 const leftCouterQuestions = document.querySelector('#leftQuestions');
+leftCouterQuestions.innerHTML = 0;
 
+const isNull = 0;
 const section = document.createElement('section');
 const title = document.createElement('h5');
 const description = document.createElement('p');
@@ -29,45 +31,61 @@ const baseOfQuestions = [
       'JavaScript is faster. JavaScript is a client-side language,, and thus it does not need the assistance of the webserver to execute. On the other hand, ASP is a server-side language and hence is always slower than JavaScript. Javascript now is also a server-side language (nodejs).',
   },
 ];
-leftCouterQuestions.innerHTML = 0;
+
 let currentPullOfQuestions = [...baseOfQuestions];
 
-const getRandomQuestion = () => {
-  const isNull = 0;
-  if (currentPullOfQuestions.length !== isNull) {
-    const current = Math.floor(Math.random() * currentPullOfQuestions.length);
-    leftCouterQuestions.innerHTML = `${currentPullOfQuestions.length - 1}`;
-    resetBtn.style.visibility = 'visible';
-    leftCouterQuestions.style.visibility = 'visible';
-    title.innerText = currentPullOfQuestions[current].question;
-    description.innerText = currentPullOfQuestions[current].answare;
+const getRandomIndex = () => {
+  const randomIndex = Math.floor(Math.random() * currentPullOfQuestions.length);
+  return randomIndex;
+};
 
+const getQestionOfRandomIndex = () => {
+  if (currentPullOfQuestions.length !== isNull) {
+    const currentIndex = getRandomIndex();
+    let titleQuestion = currentPullOfQuestions[currentIndex].question;
+    let descriptionQuestion = currentPullOfQuestions[currentIndex].answare;
+    leftCouterQuestions.innerHTML = `${currentPullOfQuestions.length - 1}`;
+    makeElementVisible(resetBtn);
+    makeElementVisible(leftCouterQuestions);
+    title.innerText = titleQuestion;
+    description.innerText = descriptionQuestion;
     section.appendChild(title);
     section.appendChild(description);
     container.appendChild(section);
-    currentPullOfQuestions.splice(current, 1);
+    currentPullOfQuestions.splice(currentIndex, 1);
   } else {
     title.innerText = 'Wyczerpałeś pulę pytań';
     description.innerText = '';
-    getQuestionBtn.style.visibility = 'hidden';
-    startOverBtn.style.visibility = 'visible';
-    resetBtn.style.visibility = 'hidden';
+    makeElementHidden(getQuestionBtn);
+    makeElementHidden(resetBtn);
+    makeElementVisible(startOverBtn);
+    makeElementHidden(leftCouterQuestions);
   }
-
   return currentPullOfQuestions;
 };
 
-getQuestionBtn.addEventListener('click', getRandomQuestion);
-
-startOverBtn.addEventListener('click', () => {
+const resetQuestions = () => {
   currentPullOfQuestions = [...baseOfQuestions];
-  title.innerText = '';
-  getQuestionBtn.style.visibility = 'visible';
-  startOverBtn.style.visibility = 'hidden';
-});
-
-resetBtn.addEventListener('click', () => {
-  currentPullOfQuestions = [...baseOfQuestions];
+  leftCouterQuestions.innerHTML = `${currentPullOfQuestions.length}`;
+  // currentPullOfQuestions = [...baseOfQuestions];
   title.innerText = '';
   description.innerText = '';
-});
+};
+
+const makeElementVisible = (element) => {
+  element.style.visibility = 'visible';
+};
+
+const makeElementHidden = (element) => {
+  element.style.visibility = 'hidden';
+};
+
+const startOverAgain = () => {
+  resetQuestions();
+  makeElementVisible(getQuestionBtn);
+  makeElementHidden(startOverBtn);
+};
+
+getQuestionBtn.addEventListener('click', getQestionOfRandomIndex);
+resetBtn.addEventListener('click', resetQuestions);
+startOverBtn.addEventListener('click', startOverAgain);

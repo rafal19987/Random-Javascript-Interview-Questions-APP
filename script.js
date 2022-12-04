@@ -1,10 +1,3 @@
-/* 
-### Something for animations reset after page preload from stackoverflow
-
-setTimeout(function () {
-  document.body.className = '';
-}, 500); */
-
 const pullOverField = document.querySelector('.pullOver');
 const getQuestionBtn = document.querySelector('#getQuestion');
 const resetBtn = document.querySelector('.material-symbols-outlined');
@@ -127,12 +120,11 @@ const getRandomIndex = () => {
 };
 
 const getQestionOfRandomIndex = () => {
-  if (currentPullOfQuestions.length !== 0) {
-    pullOverField.classList.remove('open');
+  if (currentPullOfQuestions.length) {
     const currentIndex = getRandomIndex();
-    counterDoneQuestions += 1;
     const titleQuestion = currentPullOfQuestions[currentIndex].question;
     const descriptionQuestion = currentPullOfQuestions[currentIndex].answare;
+    counterDoneQuestions++;
     remainingQuestionCounter.innerHTML = `${counterDoneQuestions} / ${baseOfQuestions.length}`;
     title.innerText = titleQuestion;
     description.innerText = descriptionQuestion;
@@ -140,12 +132,13 @@ const getQestionOfRandomIndex = () => {
     makeElementVisible(getQuestionBtn);
     makeElementVisible(remainingQuestionCounter);
     makeElementHidden(resetBtn);
+    pullOverField.classList.remove('open');
   } else {
     description.innerText = '';
     counterDoneQuestions = 0;
     makeElementHidden(getQuestionBtn);
-    makeElementVisible(resetBtn);
     makeElementHidden(remainingQuestionCounter);
+    makeElementVisible(resetBtn);
     pullOverField.classList.add('open');
   }
   return currentPullOfQuestions;
@@ -174,12 +167,6 @@ const makeElementHidden = (element) => {
 
 const startOverAgain = () => {
   resetQuestions();
-};
-
-const showAndHidePullOver = () => {
-  section.classList.contains('open')
-    ? section.classList.remove('open')
-    : section.classList.add('open');
 };
 
 getQuestionBtn.addEventListener('click', getQestionOfRandomIndex);

@@ -1,13 +1,13 @@
+const pullOverField = document.querySelector('.pullOver');
 const getQuestionBtn = document.querySelector('#getQuestion');
 const startOverBtn = document.querySelector('#startOver');
 const resetBtn = document.querySelector('#reset');
 const remainingQuestionCounter = document.querySelector('#leftQuestions');
 remainingQuestionCounter.innerHTML = 0;
 
-const isNull = 0;
-const section = document.createElement('section');
-const title = document.createElement('h5');
-const description = document.createElement('p');
+const section = document.querySelector('.questionField');
+const title = document.querySelector('.questionTitle');
+const description = document.querySelector('.questionDescription');
 
 const baseOfQuestions = [
   {
@@ -40,21 +40,25 @@ const getRandomIndex = () => {
 };
 
 const getQestionOfRandomIndex = () => {
-  if (currentPullOfQuestions.length !== isNull) {
-    let currentIndex = getRandomIndex();
-    let titleQuestion = currentPullOfQuestions[currentIndex].question;
-    let descriptionQuestion = currentPullOfQuestions[currentIndex].answare;
-    remainingQuestionCounter.innerHTML = `${currentPullOfQuestions.length - 1}`;
+  if (currentPullOfQuestions.length !== 0) {
+    pullOverField.style.visibility = 'hidden';
+    const currentIndex = getRandomIndex();
+    const titleQuestion = currentPullOfQuestions[currentIndex].question;
+    const descriptionQuestion = currentPullOfQuestions[currentIndex].answare;
+    remainingQuestionCounter.innerHTML = `${
+      currentPullOfQuestions.length - 1
+    } / ${baseOfQuestions.length}`;
     title.innerText = titleQuestion;
     description.innerText = descriptionQuestion;
-    section.appendChild(title);
+    /*     section.appendChild(title);
     section.appendChild(description);
-    container.appendChild(section);
-    doNotShowCurrentQuestionAgain();
+    container.appendChild(section); */
+    doNotShowCurrentQuestionAgain(currentIndex);
     makeElementVisible(resetBtn);
     makeElementVisible(remainingQuestionCounter);
   } else {
-    title.innerText = 'Wyczerpałeś pulę pytań';
+    // title.innerText = 'Wyczerpałeś pulę pytań';
+    pullOverField.style.visibility = 'visible';
     description.innerText = '';
     makeElementVisible(startOverBtn);
     makeElementHidden(getQuestionBtn);
@@ -71,8 +75,7 @@ const doNotShowCurrentQuestionAgain = (currentIndex) => {
 
 const resetQuestions = () => {
   currentPullOfQuestions = [...baseOfQuestions];
-  remainingQuestionCounter.innerHTML = `${currentPullOfQuestions.length}`;
-  // currentPullOfQuestions = [...baseOfQuestions];
+  remainingQuestionCounter.innerHTML = `${currentPullOfQuestions.length} / ${baseOfQuestions.length}`;
   title.innerText = '';
   description.innerText = '';
 };

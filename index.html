@@ -5,18 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Solway&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <h1>Js array mathods practice</h1>
     <div id="container">
-      <div id="leftQuestions" style="visibility: hidden"></div>
+      <header>
+        <h1>
+          Roll for random JavaScript question to practice before your interview
+        </h1>
+      </header>
+
+ 
+        <div id="leftQuestions"></div>
+        <main class="main">
+          <div class="pullOver">
+            <h1>Wyczerpałeś pulę pytań!</h1>
+            <h3>Zresetuj Pytania</h3>
+          </div>
+          <div class="questionField">
+              <h1 class="questionTitle"></h3>
+              <p class="questionDescription"></p>
+          </div>
+        </main>
+ 
+
       <div id="buttons">
-        <button id="getQuestion">Losuj pytanie</button>
-        <button id="startOver" style="visibility: hidden">
-          Rozpocznij od nowa
+        <button id="startOver" class="button">Rozpocznij od nowa</button>
+        <button id="getQuestion" class="button">Losuj pytanie</button>
+        <button id="reset" class="button">
+          <span class="material-symbols-outlined"> restart_alt </span>Reset
         </button>
-        <button id="reset" style="visibility: hidden">Reset</button>
       </div>
     </div>
   </body>

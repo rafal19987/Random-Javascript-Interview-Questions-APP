@@ -1,0 +1,104 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Solway', serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  border: 1px solid red;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.main,
+.pullOver {
+  color: white;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to left, green, lime);
+  border-radius: 2rem;
+  min-height: 30rem;
+  text-align: center;
+  width: 80vw;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pullOver {
+  visibility: hidden;
+  position: absolute;
+}
+
+#leftQuestions {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+}
+
+.questionField {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 25rem;
+  text-align: center;
+  padding: 0 3rem 0 3rem;
+}
+
+section {
+  height: 10rem;
+}
+
+.question {
+  height: 5rem;
+}
+/* 
+.questionTitle {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+} */
+
+.questionDescription {
+  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  width: 80vw;
+}
+
+.button {
+  font-size: 26px;
+  height: 80px;
+  width: 200px;
+  border: none;
+  border-radius: 32px;
+  background: linear-gradient(to left, green, lime);
+  color: white;
+}
+
+#reset,
+#startOver,
+#leftQuestions {
+  visibility: hidden;
+}
